@@ -1,0 +1,30 @@
+<html>
+
+<head></head>
+
+<body>
+    This is the update template.
+    <form action="/update/{{ pet['id'] }}" method="post">
+        <hr />
+        <p>Name:<input name="name" value="{{ pet['name'] }}" /></p>
+        <p>Age:<input name="age" value="{{ pet['age'] }}" /></p>
+        <p>Type:<input name="type" value="{{ pet['type'] }}" /></p>
+
+        <label for="owner_id">Owner:</label>
+        <select name="owner_id" id="owner_id">
+            <option value="">Homeless Pet</option>
+            {% for owner in owners %}
+            <option value="{{ owner.id }}" {% if pet.owner_id == owner.id %}selected{% endif %}>
+                {{ owner.name }} ({{ owner.email }})
+            </option>
+            {% endfor %}
+        </select>
+
+        <hr />
+        <button type="submit">Update</button>
+        <a href="/list">Cancel</a>
+        <hr />
+    </form>
+</body>
+
+</html>
